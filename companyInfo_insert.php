@@ -19,7 +19,7 @@ $dbname = 'ofs5049_431W';
 		<p>
 			<?php 
 				echo "Inserting new stock: " . $_POST["stock"] . " " . $_POST["company"] . " " . $_POST["sector"] . " " . $_POST["price"] . " " . $_POST["volume"] . " " . $_POST["pe_ratio"] . "..."; 
-				$sql = 'INSERT INTO users (lname, fname, loginid) ';
+				$sql = 'INSERT INTO users (stock, company, sector, price, volume, pe_ratio) ';
 				$sql = $sql . 'VALUES ("'.$_POST["stock"] . '","' . $_POST["company"] . '","' . $_POST["sector"] . '","' . $_POST["price"] . '","' . $_POST["volume"] . '","' . $_POST["pe_ratio"] . '")';
 				try {
 					$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
