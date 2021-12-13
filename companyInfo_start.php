@@ -52,7 +52,7 @@ try {
                 </tbody>
             </table>
 		<br><h2>Insert a new company:</h2>
-		<form action="/insert.php" method="post">
+		<form action="/companyInfo_insert.php" method="post">
 			<table>
 				<tr><td>Stock:</td><td><input type="text" id="stock" name="stock" value="?"></td></tr>
 				<tr><td>Company:</td><td><input type="text" id="company" name="company" value="?"></td></tr>
