@@ -5,6 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include "/var/www/html/server_creds.php";
+
 $host = 'localhost';
 
 ?>
@@ -16,21 +17,18 @@ $host = 'localhost';
     <body>
 		<p>
 			<?php 
-				echo "Updating company's PE Ratio: " . $_POST["stock_PE_update"] . "..."; 
-                $stock = $_POST['stock_PE_update']; 
-                $PE = $_POST['PE_update'];  
-				$sql = "UPDATE companies SET PE_Ratio = $PE WHERE Stock = '$stock'";
-				// $sql = $sql . 'VALUES ("'.$_POST["stock"] . '","' . $_POST["company"] . '","' . $_POST["sector"] . '","' . $_POST["price"] . '","' . $_POST["volume"] . '","' . $_POST["pe_ratio"] . '")';
+				echo "Deleting price target: " . $_POST["targetID"] . "..."; 
+				$sql = 'DELETE FROM price_targets WHERE targetID = "' . $_POST["targetID"] . '"';
 				try {
 					$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$conn->exec($sql);
-					echo "New record updated successfully";
-			?>
+					echo "Price target deleted successfully";
+				?>
 				<p>You will be redirected in 3 seconds</p>
 				<script>
 					var timer = setTimeout(function() {
-						window.location='companyInfo_start.php'
+						window.location='price_target_start.php'
 					}, 3000);
 				</script>
 			<?php

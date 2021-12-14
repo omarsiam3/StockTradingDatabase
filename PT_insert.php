@@ -16,21 +16,19 @@ $host = 'localhost';
     <body>
 		<p>
 			<?php 
-				echo "Updating company's PE Ratio: " . $_POST["stock_PE_update"] . "..."; 
-                $stock = $_POST['stock_PE_update']; 
-                $PE = $_POST['PE_update'];  
-				$sql = "UPDATE companies SET PE_Ratio = $PE WHERE Stock = '$stock'";
-				// $sql = $sql . 'VALUES ("'.$_POST["stock"] . '","' . $_POST["company"] . '","' . $_POST["sector"] . '","' . $_POST["price"] . '","' . $_POST["volume"] . '","' . $_POST["pe_ratio"] . '")';
+				echo "Inserting new price target: " . $_POST["stock"] . " " . $_POST["firm"] . " " . $_POST["PT"] . " " . $_POST["Date"] . "..."; 
+				$sql = 'INSERT INTO price_targets (Stock, Firm, Price_Target, Prediction_Date) ';
+				$sql = $sql . 'VALUES ("'.$_POST["stock"] . '","' . $_POST["firm"] . '","' . $_POST["PT"] . '","' . $_POST["Date"] . '")';
 				try {
 					$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$conn->exec($sql);
-					echo "New record updated successfully";
+					echo "New record created successfully";
 			?>
 				<p>You will be redirected in 3 seconds</p>
 				<script>
 					var timer = setTimeout(function() {
-						window.location='companyInfo_start.php'
+						window.location='PT_start.php'
 					}, 3000);
 				</script>
 			<?php

@@ -20,7 +20,7 @@ $host = 'localhost';
 			<?php 
 				echo "Inserting new user: " . $_POST["fname"] . " " . $_POST["lname"] . "..."; 
 				$sql = 'INSERT INTO users (lname, fname) ';
-				$sql = $sql . 'VALUES ("'.$_POST["fname"] . '","' . $_POST["lname"] . '")';
+				$sql = $sql . 'VALUES ("'.$_POST["lname"] . '","' . $_POST["fname"] . '")';
 				try {
 					$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

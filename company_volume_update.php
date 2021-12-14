@@ -25,7 +25,7 @@ $host = 'localhost';
 					$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$conn->exec($sql);
-					echo "New record created successfully";
+					echo "New record updated successfully";
 			?>
 				<p>You will be redirected in 3 seconds</p>
 				<script>

@@ -16,10 +16,10 @@ $host = 'localhost';
     <body>
 		<p>
 			<?php 
-				echo "Updating company's PE Ratio: " . $_POST["stock_PE_update"] . "..."; 
-                $stock = $_POST['stock_PE_update']; 
-                $PE = $_POST['PE_update'];  
-				$sql = "UPDATE companies SET PE_Ratio = $PE WHERE Stock = '$stock'";
+				echo "Updating user's last name: " . $_POST["UserID_updateL"] . "..."; 
+                $userID = $_POST['UserID_updateL']; 
+                $lname = $_POST['lname_update'];  
+				$sql = "UPDATE users SET lname = '$lname' WHERE loginid = '$userID'";
 				// $sql = $sql . 'VALUES ("'.$_POST["stock"] . '","' . $_POST["company"] . '","' . $_POST["sector"] . '","' . $_POST["price"] . '","' . $_POST["volume"] . '","' . $_POST["pe_ratio"] . '")';
 				try {
 					$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -30,7 +30,7 @@ $host = 'localhost';
 				<p>You will be redirected in 3 seconds</p>
 				<script>
 					var timer = setTimeout(function() {
-						window.location='companyInfo_start.php'
+						window.location='user_start.php'
 					}, 3000);
 				</script>
 			<?php
