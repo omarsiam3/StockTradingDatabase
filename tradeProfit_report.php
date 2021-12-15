@@ -10,7 +10,7 @@ $dbname = 'ofs5049_431W';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $sql = 'SELECT userid, stock, buy_price, sell_price, (((sell_price-buy_price)/buy_price)*100) AS profit_percentage FROM transactions ORDER BY profit_percentage DESC';
+    $sql = 'SELECT T.userid, U.fname, U.lname, T.stock, T.buy_price, T.sell_price, (((T.sell_price-T.buy_price)/T.buy_price)*100) AS profit_percentage FROM transactions T, users U WHERE T.userid=U.userid ORDER BY profit_percentage DESC';
     $q = $pdo->query($sql);
     $q->setFetchMode(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
