@@ -29,6 +29,8 @@ try {
                 <thead>
                     <tr>
                         <th>UserID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
                         <th>Stock</th>
                         <th>Buy Price</th>
                         <th>Sell Price</th>
@@ -40,6 +42,8 @@ try {
                         <tr> 
                             <td><?php echo htmlspecialchars($row['userid']); ?></td>
                             <td><?php echo htmlspecialchars($row['stock']); ?></td>
+                            <td><?php echo htmlspecialchars($row['fname']); ?></td>
+                            <td><?php echo htmlspecialchars($row['lname']); ?></td>
                             <td><?php echo htmlspecialchars($row['buy_price']) ?></td>
                             <td><?php echo htmlspecialchars($row['sell_price']); ?></td>
                             <td><?php echo htmlspecialchars($row['profit_percentage']) ?></td>
