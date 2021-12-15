@@ -17,8 +17,8 @@ $host = 'localhost';
     <body>
 		<p>
 			<?php 
-				echo "Deleting user: " . $_POST["loginid"] . "..."; 
-				$sql = 'DELETE FROM users WHERE loginid = "' . $_POST["loginid"] . '"';
+				echo "Deleting user: " . $_POST["UserID"] . "..."; 
+				$sql = 'DELETE FROM users WHERE UserID = "' . $_POST["UserID"] . '"';
 				try {
 					$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

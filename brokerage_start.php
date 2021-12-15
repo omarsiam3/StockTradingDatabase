@@ -32,12 +32,18 @@ try {
                 margin-left: 100px;
             }
 
+            #buttons {
+                float: left;
+                display: inline-block;
+                margin-left: 100px;
+            }
+
         </style>
     </head>
     <body>
         <div id="container">
             <div id="Info_Insert">
-                <h2>Price Target Information</h2>
+                <h2>Brokerage Information</h2>
                 <table border=1 cellspacing=5 cellpadding=5>
                     <thead>
                         <tr>
@@ -60,7 +66,10 @@ try {
                         <?php endwhile; ?>
                     </tbody>
                 </table>
-                <br><h2>Insert a new price target:</h2>
+                <br>
+            </div>
+            <div id="Update">
+            <br><h2>Insert a new brokerage:</h2>
                     <form action="/broker_insert.php" method="post">
                         <table>
                             <tr><td>Brokerage:</td><td><input type="text" id="brokerage" name="brokerage" value="?"></td></tr>
@@ -71,8 +80,6 @@ try {
                         <input type="submit" value="INSERT">
                     </form>
                 <br>
-            </div>
-            <div id="Update">
                 <br><h2>Update a brokerage's buy fee:</h2>
                 <form action="/broker_bFee_update.php" method="post">
                     <table>
@@ -91,7 +98,7 @@ try {
                     <input type="submit" value="UPDATE">
                 </form>
                 <br>
-                <h2>Update a price target's prediction date:</h2>
+                <h2>Update a brokerage's prediction date:</h2>
                 <form action="/broker_minAmt_update.php" method="post">
                     <table>
                         <tr><td>Brokerage:</td><td><input type="text" id="broker_minAmt_update" name="broker_minAmt_update" value="?"></td></tr>
@@ -99,8 +106,48 @@ try {
                     </table>
                     <input type="submit" value="UPDATE">
                 </form>
+                <br>            
+            </div>
+            <div id="buttons">
+                <form action="/user_start.php">
+                    <input type="submit" value="Users">
+                </form>
                 <br>
-                <br><br><br>
+                <form action="/transaction_start.php">
+                    <input type="submit" value="Transactions">
+                </form>
+                <br>
+                <form action="/PT_start.php">
+                    <input type="submit" value="Price Targets">
+                </form>
+                <br>
+                <form action="/companyInfo_start.php">
+                    <input type="submit" value="Companies">
+                </form>
+                <br>
+                <form action="/brokerage_start.php">
+                    <input type="submit" value="Brokerages">
+                </form>
+                <br>
+                <form action="/fiveTableJoin.php">
+                    <input type="submit" value="Additional Transaction Info">
+                </form>
+                <br>
+                <form action="/portfolioProfit_report.php">
+                    <input type="submit" value="Portfolio Profit">
+                </form>
+                <br>
+                <form action="/priceTargetDiff_report.php">
+                    <input type="submit" value="Price Target Accuracy">
+                </form>
+                <br>
+                <form action="/tradeProfit_report.php">
+                    <input type="submit" value="Individual Trade Profit Report">
+                </form>
+                <br>
+                <form action="/profitBySector_report.php">
+                    <input type="submit" value="Profit By Sector">
+                </form>
             </div>
         </div>
 </body>

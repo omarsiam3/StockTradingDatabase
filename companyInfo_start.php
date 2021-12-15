@@ -32,6 +32,12 @@ try {
                 margin-left: 100px;
             }
 
+            #buttons {
+                float: left;
+                display: inline-block;
+                margin-left: 100px;
+            }
+
         </style>
     </head>
     <body>
@@ -64,7 +70,9 @@ try {
                         <?php endwhile; ?>
                     </tbody>
                 </table>
-                <br><h2>Insert a new company:</h2>
+            </div>
+            <div id="Update">
+            <br><h2>Insert a new company:</h2>
                     <form action="/companyInfo_insert.php" method="post">
                         <table>
                             <tr><td>Stock:</td><td><input type="text" id="stock" name="stock" value="?"></td></tr>
@@ -77,15 +85,13 @@ try {
                         <input type="submit" value="INSERT">
                     </form>
                 <br>
-            </div>
-            <div id="Update">
                 <br><h2>Update a company's stock price:</h2>
                 <form action="/company_price_update.php" method="post">
                     <table>
                         <tr><td>Stock:</td><td><input type="text" id="stock_price_update" name="stock_price_update" value="?"></td></tr>
                         <tr><td>New Price:</td><td><input type="text" id="price_update" name="price_update" value="?"></td></tr>
                     </table>
-                    <input type="submit" value="UPDATE_PRICE ">
+                    <input type="submit" value="UPDATE">
                 </form>
                 <br>
                 <h2>Update a company's volume:</h2>
@@ -94,7 +100,7 @@ try {
                         <tr><td>Stock:</td><td><input type="text" id="stock_volume_update" name="stock_volume_update" value="?"></td></tr>
                         <tr><td>New Volume:</td><td><input type="text" id="volume_update" name="volume_update" value="?"></td></tr>
                     </table>
-                    <input type="submit" value="UPDATE_VOLUME">
+                    <input type="submit" value="UPDATE">
                 </form>
                 <br>
                 <h2>Update a company's PE Ratio:</h2>
@@ -103,11 +109,52 @@ try {
                         <tr><td>Stock:</td><td><input type="text" id="stock_PE_update" name="stock_PE_update" value="?"></td></tr>
                         <tr><td>New PE Ratio:</td><td><input type="text" id="PE_update" name="PE_update" value="?"></td></tr>
                     </table>
-                    <input type="submit" value="UPDATE_PE">
+                    <input type="submit" value="UPDATE">
                 </form>
                 <br>
                 <br><br><br>
             </div>
+            <div id="buttons">
+                <form action="/user_start.php">
+                    <input type="submit" value="Users">
+                </form>
+                <br>
+                <form action="/transaction_start.php">
+                    <input type="submit" value="Transactions">
+                </form>
+                <br>
+                <form action="/PT_start.php">
+                    <input type="submit" value="Price Targets">
+                </form>
+                <br>
+                <form action="/companyInfo_start.php">
+                    <input type="submit" value="Companies">
+                </form>
+                <br>
+                <form action="/brokerage_start.php">
+                    <input type="submit" value="Brokerages">
+                </form>
+                <br>
+                <form action="/fiveTableJoin.php">
+                    <input type="submit" value="Additional Transaction Info">
+                </form>
+                <br>
+                <form action="/portfolioProfit_report.php">
+                    <input type="submit" value="Portfolio Profit">
+                </form>
+                <br>
+                <form action="/priceTargetDiff_report.php">
+                    <input type="submit" value="Price Target Accuracy">
+                </form>
+                <br>
+                <form action="/tradeProfit_report.php">
+                    <input type="submit" value="Individual Trade Profit Report">
+                </form>
+                <br>
+                <form action="/profitBySector_report.php">
+                    <input type="submit" value="Profit By Sector">
+                </form>
+            </div>                
         </div>
 </body>
 </html>

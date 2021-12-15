@@ -1,16 +1,16 @@
 <?php
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include "/var/www/html/server_creds.php";
-
 $host = 'localhost';
+
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $sql = 'SELECT transactionID, UserID, Stock, Buy_Price, Sell_Price, no_of_shares, Buy_Date, Sell_Date, Brokerage, Exchange FROM transactions';
+    $sql = 'SELECT U.fname, U.lname, B.brokerage, B.Buy_Fee, B.Sell_Fee, T.exchange, E.country, T.stock, C.Sector, T.Buy_Date, T.Sell_Date, T.no_of_shares FROM transactions T, brokerages B, exchanges E, users U, companies C WHERE T.UserID = U.UserID AND T.Exchange = E.Exchange AND T.Brokerage = B.Brokerage AND T.Stock = C.Stock';
+    #$sql = 'SELECT U.fname, U.lname, T.stock, B.brokerage, T.exchange, E.country, (T.Sell_Price-T.Buy_Price - ((T.no_of_shares*B.Buy_Fee)+(T.no_of_shares*B.Sell_Fee))) AS profit FROM transactions T, brokerages B, exchanges E, users U, companies C WHERE T.UserID = U.UserID AND T.Exchange = E.Exchange AND T.Brokerage = B.Brokerage AND T.Transactions = C.Companies';
     $q = $pdo->query($sql);
     $q->setFetchMode(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -20,7 +20,7 @@ try {
 <!DOCTYPE html>
 <html>
     <head>
-        <title>PHP MySQL Query Data Demo</title>
+        <title>User Profits</title>
         <style>
 
             #Info_Insert {
@@ -39,59 +39,45 @@ try {
     <body>
         <div id="container">
             <div id="Info_Insert">
-                <h2>Current List of Transactions</h2>
+                <h2>Additional Transaction Data</h2>
                 <table border=1 cellspacing=5 cellpadding=5>
                     <thead>
                         <tr>
-                            <th>Transaction ID</th>
-                            <th>User ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Brokerage</th>
+                            <th>Buy Fee</th>
+                            <th>Sell Fee</th>
+                            <th>Exchange</th>
+                            <th>Exchange Country</th>
                             <th>Stock</th>
-                            <th>Buy Price</th>
-                            <th>Sell Price</th>
-                            <th>Number of Shares</th>
+                            <th>Sector</th>
                             <th>Buy Date</th>
                             <th>Sell Date</th>
-                            <th>Brokerage</th>
-                            <th>Exchange</th>
-                            <th>Delete?</th>
+                            <th>Number of Shares</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php while ($row = $q->fetch()): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($row['transactionID']); ?></td>
-                                <td><?php echo htmlspecialchars($row['UserID']); ?></td>
-                                <td><?php echo htmlspecialchars($row['Stock']) ?></td>
-                                <td><?php echo htmlspecialchars($row['Buy_Price']); ?></td>
-                                <td><?php echo htmlspecialchars($row['Sell_Price']); ?></td>
-                                <td><?php echo htmlspecialchars($row['no_of_shares']); ?></td>
+                            <tr> 
+                                <td><?php echo htmlspecialchars($row['fname']); ?></td>
+                                <td><?php echo htmlspecialchars($row['lname']); ?></td>
+                                <td><?php echo htmlspecialchars($row['brokerage']) ?></td>
+                                <td><?php echo htmlspecialchars($row['Buy_Fee']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Sell_Fee']) ?></td>
+                                <td><?php echo htmlspecialchars($row['exchange']); ?></td>
+                                <td><?php echo htmlspecialchars($row['country']) ?></td>
+                                <td><?php echo htmlspecialchars($row['stock']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Sector']) ?></td>
                                 <td><?php echo htmlspecialchars($row['Buy_Date']); ?></td>
-                                <td><?php echo htmlspecialchars($row['Sell_Date']); ?></td>
-                                <td><?php echo htmlspecialchars($row['Brokerage']); ?></td>
-                                <td><?php echo htmlspecialchars($row['Exchange']); ?></td>
-                                <td><?php echo '<form action="/delete_transaction.php" method="post"><input type="submit" value="DELETE"><input type="hidden" name="transactionID" value="' . htmlspecialchars($row['transactionID']) . '"></form>'; ?></td>
+                                <td><?php echo htmlspecialchars($row['Sell_Date']) ?></td>
+                                <td><?php echo htmlspecialchars($row['no_of_shares']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     </tbody>
                 </table>
             </div>
             <div id="buttons">
-                <br><h2>Insert a new transaction:</h2>
-                <form action="/insert_transaction.php" method="post">
-                    <table>
-                        <tr><td>User ID:</td><td><input type="text" id="userID" name="userID" value="?"></td></tr>
-                        <tr><td>Stock:</td><td><input type="text" id="Stock" name="Stock" value="?"></td></tr>
-                        <tr><td>Buy Price:</td><td><input type="text" id="Buy_Price" name="Buy_Price" value="?"></td></tr>
-                        <tr><td>Sell Price:</td><td><input type="text" id="Sell_Price" name="Sell_Price" value="?"></td></tr>
-                        <tr><td>Number of Shares:</td><td><input type="text" id="no_of_shares" name="no_of_shares" value="?"></td></tr>
-                        <tr><td>Buy Date (YYYY-MM-DD):</td><td><input type="text" id="Buy_Date" name="Buy_Date" value="?"></td></tr>
-                        <tr><td>Sell Date (YYYY-MM-DD):</td><td><input type="text" id="Sell_Date" name="Sell_Date" value="?"></td></tr>
-                        <tr><td>Brokerage:</td><td><input type="text" id="Brokerage" name="Brokerage" value="?"></td></tr>
-                        <tr><td>Exchange:</td><td><input type="text" id="Exchange" name="Exchange" value="?"></td></tr>
-                    </table>
-                    <input type="submit" value="INSERT">
-                </form>
-                <br>
                 <form action="/user_start.php">
                     <input type="submit" value="Users">
                 </form>
@@ -133,6 +119,6 @@ try {
                 </form>
                 <br>
             </div>                
-        </body>
-    </div>
+        </div>
+    </body>
 </html>

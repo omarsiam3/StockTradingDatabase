@@ -7,6 +7,8 @@ error_reporting(E_ALL);
 include "/var/www/html/server_creds.php";
 $host = 'localhost';
 
+
+
 ?>
 <!DOCTYPE html>
 <html>
