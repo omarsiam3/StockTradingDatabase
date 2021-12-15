@@ -10,7 +10,8 @@ $dbname = 'ofs5049_431W';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $sql = 'SELECT T.userid, U.fname, U.lname, T.stock, B.brokerage, T.exchange, E.country ((position_size*buy_fee)+(position_size*sell_fee)) AS total_fees, E.country FROM transactions T, brokerages B, exchanges E, users U, companies C WHERE T.userid = U.users AND T.exchange = E.exchange';
+    $sql = 'SELECT T.userid, U.fname, U.lname, T.stock, B.brokerage, T.exchange, E.country, ((T.oosition_size*B.buy_fee)+(T.position_size*B.sell_fee)) AS total_fees FROM transactions T, brokerages B, exchanges E, users U, companies C WHERE T.UserID = U.UserID AND T.Exchange = E.Exchange;
+    ';
     $q = $pdo->query($sql);
     $q->setFetchMode(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
