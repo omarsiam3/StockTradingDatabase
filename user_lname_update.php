@@ -19,7 +19,7 @@ $host = 'localhost';
 				echo "Updating user's last name: " . $_POST["UserID_updateL"] . "..."; 
                 $userID = $_POST['UserID_updateL']; 
                 $lname = $_POST['lname_update'];  
-				$sql = "UPDATE users SET lname = '$lname' WHERE loginid = '$userID'";
+				$sql = "UPDATE users SET lname = '$lname' WHERE userID = '$userID'";
 				// $sql = $sql . 'VALUES ("'.$_POST["stock"] . '","' . $_POST["company"] . '","' . $_POST["sector"] . '","' . $_POST["price"] . '","' . $_POST["volume"] . '","' . $_POST["pe_ratio"] . '")';
 				try {
 					$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);

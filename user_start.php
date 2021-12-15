@@ -10,7 +10,7 @@ $host = 'localhost';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $sql = 'SELECT loginid, lname, fname FROM users';
+    $sql = 'SELECT UserId, lname, fname FROM users';
     $q = $pdo->query($sql);
     $q->setFetchMode(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -52,10 +52,10 @@ try {
                     <tbody>
                         <?php while ($row = $q->fetch()): ?>
                             <tr>
-                                <td><?php echo htmlspecialchars($row['loginid']); ?></td>
+                                <td><?php echo htmlspecialchars($row['userID']); ?></td>
                                 <td><?php echo htmlspecialchars($row['fname']) ?></td>
                                 <td><?php echo htmlspecialchars($row['lname']); ?></td>
-                                <td><?php echo '<form action="/delete_user.php" method="post"><input type="submit" value="DELETE"><input type="hidden" name="loginid" value="' . htmlspecialchars($row['loginid']) . '"></form>'; ?></td>
+                                <td><?php echo '<form action="/delete_user.php" method="post"><input type="submit" value="DELETE"><input type="hidden" name="userID" value="' . htmlspecialchars($row['userID']) . '"></form>'; ?></td>
                             </tr>
                         <?php endwhile; ?>
                     </tbody>

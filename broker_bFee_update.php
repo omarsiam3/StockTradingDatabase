@@ -16,21 +16,21 @@ $host = 'localhost';
     <body>
 		<p>
 			<?php 
-				echo "Updating user's first name: " . $_POST["UserID_Update"] . "..."; 
-                $userID = $_POST['UserID_Update']; 
-                $fname = $_POST['fname_update'];  
-				$sql = "UPDATE users SET fname = $fname WHERE userID = '$userID'";
+				echo "Updating brokerage's buy fee: " . $_POST["broker_bFee_update"] . "..."; 
+                $broker = $_POST['broker_bFee_update']; 
+                $bFee = $_POST['buy_fee_update'];  
+				$sql = "UPDATE brokerages SET Buy_Fee = '$bFee' WHERE brokerage = '$broker'";
 				// $sql = $sql . 'VALUES ("'.$_POST["stock"] . '","' . $_POST["company"] . '","' . $_POST["sector"] . '","' . $_POST["price"] . '","' . $_POST["volume"] . '","' . $_POST["pe_ratio"] . '")';
 				try {
 					$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$conn->exec($sql);
-					echo "New record updated successfully";
+					echo "Record updated successfully";
 			?>
 				<p>You will be redirected in 3 seconds</p>
 				<script>
 					var timer = setTimeout(function() {
-						window.location='users_start.php'
+						window.location='brokerage_start.php'
 					}, 3000);
 				</script>
 			<?php

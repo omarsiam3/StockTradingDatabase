@@ -5,7 +5,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include "/var/www/html/server_creds.php";
+
 $host = 'localhost';
+
 
 ?>
 <!DOCTYPE html>
@@ -16,21 +18,19 @@ $host = 'localhost';
     <body>
 		<p>
 			<?php 
-				echo "Updating user's first name: " . $_POST["UserID_Update"] . "..."; 
-                $userID = $_POST['UserID_Update']; 
-                $fname = $_POST['fname_update'];  
-				$sql = "UPDATE users SET fname = $fname WHERE userID = '$userID'";
-				// $sql = $sql . 'VALUES ("'.$_POST["stock"] . '","' . $_POST["company"] . '","' . $_POST["sector"] . '","' . $_POST["price"] . '","' . $_POST["volume"] . '","' . $_POST["pe_ratio"] . '")';
+				echo "Inserting new brokerage: " . $_POST["brokerage"] . "..."; 
+				$sql = 'INSERT INTO brokerages (Brokerage, Buy_Fee, Sell_Fee, Min_Amount) ';
+				$sql = $sql . 'VALUES ("'.$_POST["brokerage"] . '","' . $_POST["bFee"] . '","' . $_POST["sFee"] . '","' . $_POST["minAmt"] . '")';
 				try {
 					$conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 					$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$conn->exec($sql);
-					echo "New record updated successfully";
+					echo "\nNew record created successfully";
 			?>
 				<p>You will be redirected in 3 seconds</p>
 				<script>
 					var timer = setTimeout(function() {
-						window.location='users_start.php'
+						window.location='brokerage_start.php'
 					}, 3000);
 				</script>
 			<?php
