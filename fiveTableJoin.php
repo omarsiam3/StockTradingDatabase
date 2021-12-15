@@ -10,7 +10,7 @@ $dbname = 'ofs5049_431W';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $sql = 'SELECT T.userid, U.fname, U.lname, T.stock, B.brokerage, T.exchange, E.country, ((T.position_size*B.buy_fee)+(T.position_size*B.sell_fee)) AS total_fees FROM transactions T, brokerages B, exchanges E, users U, companies C WHERE T.UserID = U.UserID AND T.Exchange = E.Exchange';
+    $sql = 'SELECT T.userid, U.fname, U.lname, T.stock, C.sector, B.brokerage, T.exchange, E.country, ((T.position_size*B.buy_fee)+(T.position_size*B.sell_fee)) AS total_fees FROM transactions T, brokerages B, exchanges E, users U, companies C WHERE T.userid = U.userid AND T.exchange = E.exchange AND B.brokerage=T.brokerage AND C.stock = T.stock';
     $q = $pdo->query($sql);
     $q->setFetchMode(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -33,6 +33,7 @@ try {
                         <th>Last Name</th>
                         <th>Stock</th>
                         <th>Brokerage</th>
+                        <th>Sector</th>
                         <th>Exchange</th>
                         <th>Exchange Country</th>
                     </tr>
@@ -44,6 +45,7 @@ try {
                             <td><?php echo htmlspecialchars($row['stock']); ?></td>
                             <td><?php echo htmlspecialchars($row['fname']); ?></td>
                             <td><?php echo htmlspecialchars($row['lname']); ?></td>
+                            <td><?php echo htmlspecialchars($row['sector']); ?></td>
                             <td><?php echo htmlspecialchars($row['brokerage']) ?></td>
                             <td><?php echo htmlspecialchars($row['exchange']); ?></td>
                             <td><?php echo htmlspecialchars($row['country']) ?></td>
