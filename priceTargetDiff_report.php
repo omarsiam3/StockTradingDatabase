@@ -10,7 +10,7 @@ $dbname = 'ofs5049_431W';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $sql = 'SELECT P.firm, P.price_target, C.price, ((P.price_target-C.price)/C.price)*100) AS percent_ifference FROM price_targets P, companies C ORDER BY dercent_difference ASC;';
+    $sql = 'SELECT P.firm, P.price_target, C.price, ((P.price_target-C.price)/C.price)*100) AS percent_difference FROM price_targets P, companies C ORDER BY dercent_difference ASC';
     $q = $pdo->query($sql);
     $q->setFetchMode(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
