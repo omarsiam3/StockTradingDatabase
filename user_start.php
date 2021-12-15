@@ -80,7 +80,7 @@ try {
                 <h2>Update a user's first name:</h2>
                     <form action="/user_fname_update.php" method="post">
                         <table>
-                            <tr><td>User ID:</td><td><input type="text" id="UserID_update" name="UserID_update" value="?"></td></tr>
+                            <tr><td>User ID:</td><td><input type="text" id="UserID_Update" name="UserID_Update" value="?"></td></tr>
                             <tr><td>New First Name:</td><td><input type="text" id="fname_update" name="fname_update" value="?"></td></tr>
                         </table>
                         <input type="submit" value="UPDATE">
