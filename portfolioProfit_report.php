@@ -10,7 +10,7 @@ $dbname = 'ofs5049_431W';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $sql = 'SELECT T.userid, U.fname, U.lname, SUM((T.Sell_Price-T.Buy_Price)*T.Position_Size) AS total_profit from transactions T,  users U WHERE t.userid = U.userid GROUP BY userid ORDER BY Total_Profit DESC;';
+    $sql = 'SELECT T.userid, U.fname, U.lname, SUM((T.Sell_Price-T.Buy_Price)*T.Position_Size) AS total_profit from transactions T,  users U WHERE t.userid = U.userid GROUP BY userid ORDER BY Total_Profit DESC';
     $q = $pdo->query($sql);
     $q->setFetchMode(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
